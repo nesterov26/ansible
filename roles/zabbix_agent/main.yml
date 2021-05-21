@@ -1,0 +1,28 @@
+  - block:    # ==== Block for Debian ====
+
+      - name: Install zabbix-agent on Debian
+        apt:
+          pkg: zabbix-agent
+          state: latest
+    when: ansible_os_family == "Debian"
+
+  - block:    # ==== Block for RedHat ====
+  
+      - name: Install zabbix-agent on RedHat
+        yum:
+          name: zabbix-agent
+          state: latest
+    when: ansible_os_family == "RedHat"
+
+  - name: Generate zabbix_agentd.conf
+    template:
+      src: zabbix_agentd.j2
+      dest: '{{dest}}'/zabbix_agentd.conf
+      owner: root
+      group: root
+      mode: '0644'
+
+  - name: Restart service Zabbix_agent
+    ansible.builtin.service:
+      name: zabbix-agent.service
+      state: restarted
