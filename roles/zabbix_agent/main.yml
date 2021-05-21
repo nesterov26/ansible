@@ -1,4 +1,4 @@
-  - block:    # ==== Block for Debian ====
+  - block:    # ==== Block for Debian ==== #
 
       - name: Install zabbix-agent on Debian
         apt:
@@ -6,7 +6,7 @@
           state: latest
     when: ansible_os_family == "Debian"
 
-  - block:    # ==== Block for RedHat ====
+  - block:    # ==== Block for RedHat ==== #
   
       - name: Install zabbix-agent on RedHat
         yum:
